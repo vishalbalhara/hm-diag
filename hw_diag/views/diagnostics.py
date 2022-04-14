@@ -57,7 +57,7 @@ def read_diagnostics_file():
 def get_diagnostics_json():
     diagnostics = read_diagnostics_file()
     response = jsonify(diagnostics)
-    response.headers.set('X-Robots-Tag','none')
+    response.headers.set('X-Robots-Tag', 'none')
     response.headers.set('Content-Disposition',
                          'attachment;filename=nebra-diag.json'
                          )
@@ -77,7 +77,7 @@ def get_diagnostics():
         display_lte=display_lte,
         now=now
     )
-    response.headers.set('X-Robots-Tag','none')
+    response.headers.set('X-Robots-Tag', 'none')
 
     return response
 
@@ -109,7 +109,7 @@ def get_initialisation_file():
 
     diagnostics_str = str(json.dumps(diagnostics_report))
     response_b64 = base64.b64encode(diagnostics_str.encode('ascii'))
-    response_b64.headers.set('X-Robots-Tag','none')
+    response_b64.headers.set('X-Robots-Tag', 'none')
     return response_b64
 
 
@@ -122,7 +122,7 @@ def version_information():
         'firmware_short_hash': os.getenv('FIRMWARE_SHORT_HASH', 'unknown'),
     }
 
-    response.headers.set('X-Robots-Tag','none')
+    response.headers.set('X-Robots-Tag', 'none')
 
     return response
 
