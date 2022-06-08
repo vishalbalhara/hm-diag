@@ -102,3 +102,9 @@ This repo automatically builds docker containers and uploads them to two reposit
 - [hm-diag on GitHub Packages](https://github.com/NebraLtd/hm-diag/pkgs/container/hm-diag)
 
 The images are tagged using the docker long and short commit SHAs for that release. The current version deployed to miners can be found in the [helium-miner-software repo](https://github.com/NebraLtd/helium-miner-software/blob/production/docker-compose.yml).
+
+## RUN locally
+```
+gunicorn --bind 0.0.0.0:5000 --timeout 300 hw_diag:wsgi_app
+```
+You might have to comment out some code.

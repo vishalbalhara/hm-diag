@@ -1,0 +1,85 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.2.0
+    hooks:
+    -   id: trailing-whitespace
+    -   id: end-of-file-fixer
+    -   id: check-yaml
+    -   id: check-added-large-files
+-   repo: https://github.com/pre-commit/mirrors-autopep8
+    rev: ''  # Use the sha / tag you want to point at
+    hooks:
+    -   id: autopep8
+        name: autopep8
+        entry: autopep8
+        language: python
+        'types': [python]
+        args: [ "--max-line-length", "100", "-i" ]
+        require_serial: false
+        additional_dependencies: []
+-   repo: https://github.com/Lucas-C/pre-commit-hooks-bandit
+    rev: v1.0.5
+    hooks:
+    -   id: python-bandit-vulnerability-check
+        args: ["--exclude .venv"]
+-   repo: https://github.com/pre-commit/mirrors-mypy
+    rev: ''  # Use the sha / tag you want to point at
+    hooks:
+    -   id: mypy
+# -   repo: https://github.com/pre-commit/mirrors-yapf
+#     rev: ''  # Use the sha / tag you want to point at
+#     hooks:
+#     -   id: yapf
+-   repo: https://github.com/pre-commit/pygrep-hooks
+    rev: v1.9.0  # Use the ref you want to point at
+    hooks:
+    -   id: python-use-type-annotations
+# -   repo: git://github.com/FalconSocial/pre-commit-mirrors-pep257
+#     sha: ''  # Use the sha / tag you want to point at
+#     hooks:
+#     -   id: pep257
+# - repo: git://github.com/FalconSocial/pre-commit-python-sorter
+#   sha: 1.0.4
+#   hooks:
+#   - id: python-import-sorter
+#     args: ['--silent-overwrite']
+# - repo: https://github.com/PyCQA/prospector
+#   rev: 1.7.3 # The version of Prospector to use, if not 'master' for latest
+#   hooks:
+#   - id: prospector
+#     args:
+#           - --summary-only
+          # - --zero-exit
+# -   repo: https://github.com/asottile/add-trailing-comma
+#     rev: v2.2.1
+#     hooks:
+#     -   id: add-trailing-comma
+# -   repo: https://github.com/asottile/pyupgrade
+#     rev: v2.31.0
+#     hooks:
+#     -   id: pyupgrade
+# -   repo: https://github.com/asottile/blacken-docs
+#     rev: v1.12.1
+#     hooks:
+#     -   id: blacken-docs
+#         additional_dependencies: [black==...]
+# -   repo: https://github.com/asottile/dead
+#     rev: v1.4.0
+#     hooks:
+#     -   id: dead
+-   repo: https://github.com/asottile/setup-cfg-fmt
+    rev: v1.20.0
+    hooks:
+    -   id: setup-cfg-fmt
+-   repo: https://github.com/pycqa/flake8
+    rev: ''  # pick a git hash / tag to point to
+    hooks:
+    -   id: flake8
+# - repo: https://github.com/psf/black
+#   rev: 22.1.0
+#   hooks:
+#     - id: black
+#       language_version: python3.9
+#       args: ['-l 100']
