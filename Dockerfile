@@ -44,7 +44,7 @@ RUN pip --no-cache-dir install .
 ####################################################################################################
 ################################### Stage: runner ##################################################
 
-FROM balenalib/raspberry-pi-debian-python:buster-build-20211014 as runner
+FROM balenalib/raspberry-pi-debian:buster-build-20211014 as runner
 
 RUN \
     install_packages \
