@@ -26,16 +26,16 @@ class MacDiagnostics():
         {
             'key': 'W0',
             'friendly_key': 'wifi_mac_address',
-            'mac_filepath': '/sys/class/net/wlan0/address'
+            'mac_filepath': '/sys/class/net/wlp2s0/address'
         }
     ]
 
     def __init__(self):
         def get_diagnostic_for_interface(interface_info: dict) -> Diagnostic:
             return MacDiagnostic(
-              interface_info['key'],
-              interface_info['friendly_key'],
-              interface_info['mac_filepath'])
+                interface_info['key'],
+                interface_info['friendly_key'],
+                interface_info['mac_filepath'])
 
         self.mac_diagnostics = map(get_diagnostic_for_interface, self.INTERFACE_MAPPINGS)
 

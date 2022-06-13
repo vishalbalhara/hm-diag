@@ -3,7 +3,7 @@
 ####################################################################################################
 ################################## Stage: builder ##################################################
 
-FROM balenalib/raspberry-pi-debian:buster-build-20211014 as builder
+FROM balenalib/aarch64-debian:buster-build as builder
 
 # Nebra uses /opt by convention
 WORKDIR /opt/
@@ -13,8 +13,10 @@ RUN \
     install_packages \
         python3-venv \
         python3-pip \
+        python3-dev \
         build-essential \
-        libdbus-glib-1-dev
+        libdbus-glib-1-dev \
+        cmake
 
 # This will be the path that venv uses for installation below
 ENV PATH="/opt/venv/bin:$PATH"
@@ -22,8 +24,9 @@ ENV PATH="/opt/venv/bin:$PATH"
 # without pinning the pip version, we get linter warning
 COPY requirements.txt requirements.txt
 RUN python3 -m venv /opt/venv && \
-    pip install --no-cache-dir --upgrade pip==22.0.1 && \
-    pip install --no-cache-dir -r requirements.txt
+    pip install --no-cache-dir --upgrade pip==22.0.1
+
+RUN pip install --no-cache-dir -r requirements.txt
 
 # firehose build, the tar is obtained from  quectel.
 # there is no install target in Makefile, doing manual copy
@@ -44,15 +47,18 @@ RUN pip --no-cache-dir install .
 ####################################################################################################
 ################################### Stage: runner ##################################################
 
-FROM balenalib/raspberry-pi-debian:buster-build-20211014 as runner
+FROM balenalib/aarch64-debian:buster-run as runner
 
+# we have to install python even if we are copying venv from builder.
+# which is strage venv should have a copy of python
 RUN \
     install_packages \
         wget \
         i2c-tools \
         libdbus-1-3 \
         gpg \
-        libatomic1
+        libatomic1 \
+        python3-venv
 
 # Nebra uses /opt by convention
 WORKDIR /opt/
